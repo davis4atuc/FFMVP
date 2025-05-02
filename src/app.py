@@ -23,7 +23,7 @@ def echo_input():
     input_text = request.form.get("user_input", "")
     user_id = get_user(input_text)
     if user_id is None:
-        print( "User not found")
+        return "User not found"
     print(f"UserID: {user_id['user_id']}")
     league = get_user_leagues(user_id['user_id'], season="2023")
     pprint(league[0])
