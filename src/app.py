@@ -24,7 +24,7 @@ def echo_input():
     user_id = get_user(input_text)
     if user_id is None:
         print( "User not found")
-    print (f'UserID: {user_id['user_id']}')
+    print(f"UserID: {user_id['user_id']}")
     league = get_user_leagues(user_id['user_id'], season="2023")
     pprint(league[0])
     rosters = get_roster_ids(league[0]['league_id'])
