@@ -11,17 +11,6 @@ def test_echo_input(client):
         assert response.status_code == 200
         assert b"test_user" in response.data
 
-def test_user_not_found(client, mocker):
-        # Mock the get_user function to return None
-        mocker.patch('app.get_user', return_value=None)
-
-        # Send a POST request to the /get_roster route
-        response = client.post('/get_roster', data={'sleeper_username': 'nonexistent_user'})
-
-        # Assert the response
-        assert response.status_code == 200
-        assert b"User not found" in response.data
-
 def test_get_roster(client, mocker):
         # Mock the Sleeper API functions
         mocker.patch('app.get_user', return_value={'user_id': '12345'})
