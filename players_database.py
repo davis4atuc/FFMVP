@@ -24,6 +24,8 @@ def update_player_database():
     from sleeper_api import get_player_data
     with app.app_context():
         db.create_all()  # Create tables
+        Player.query.delete()
+        db.session.commit()
         players = get_player_data()
         for player_id, details in players.items():
             print(f"Processing player: {player_id} - {details.get('first_name', 'Unknown')} {details.get('last_name', 'Unknown')} - {details.get('position', 'Unknown')} - {details.get('team', 'Unknown')}")

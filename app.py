@@ -13,6 +13,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Players.sqlite3'
 
 db.init_app(app)
+with app.app_context():
+    db.create_all()  # This creates the tables if they don't exist
 
 @app.route("/")
 def main():
@@ -61,6 +63,8 @@ def get_roster():
 @app.route("/get_player_data", methods=["POST"])
 def get_players():
     input_text = request.form.get("player_id", "")
+    if Player.query.first() is None:
+        return "Player database is empty. Please refresh the database."
     player = Player.query.filter_by(player_id=input_text).first()
     if player is None:
         return "Player not found in database. Try refreshing the database."
