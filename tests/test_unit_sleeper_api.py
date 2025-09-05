@@ -21,6 +21,6 @@ def test_get_user_found(client, mocker):
 
         # Assert the response
         assert response.status_code == 200
-        assert b"roster" in response.data
+        assert b"Player IDs:" in response.data
         assert b"player1" in response.data
         assert b"player2" in response.data
