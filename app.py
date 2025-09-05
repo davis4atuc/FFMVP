@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
-import time
 from flask import Flask, request
-from pprint import pprint
+from prometheus_client import Counter, generate_latest
 from db import db
 from players_database import Player
 import players_database
@@ -11,6 +10,8 @@ from sleeper_api import (get_user_leagues, get_user, get_player_data,
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Players.sqlite3'
+
+REQUEST_COUNTER = Counter('flask_app_requests_total', 'Total number of requests')
 
 db.init_app(app)
 with app.app_context():
@@ -100,3 +101,10 @@ def refresh_player_db():
 def health():
     return "OK", 200
 
+@app.before_request
+def before_request():
+    REQUEST_COUNTER.inc()
+
+@app.route("/metrics")
+def metrics():
+    return generate_latest(REQUEST_COUNTER), 200, {'Content-Type': 'application/json'}
