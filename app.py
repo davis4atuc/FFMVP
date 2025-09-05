@@ -34,7 +34,7 @@ def main():
      </form>
      Lookup player data by ID:
      <form action="/get_player_data" method="POST">
-         <input name="player_id">
+         <input name="player_id" value="10236">
          <input type="submit" value="Get Player Data">
      </form>
      <button onclick="location.href='/refresh_player_db'" type="button">
