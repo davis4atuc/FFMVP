@@ -37,6 +37,7 @@ def update_player_database():
             )
             db.session.merge(new_player)  # Use merge to handle updates
         db.session.commit()
+        return len(players)
 
 '''
 In main we first get the current player data and then

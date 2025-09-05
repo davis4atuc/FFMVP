@@ -89,5 +89,5 @@ def analyze_points():
 
 @app.route("/refresh_player_db")
 def refresh_player_db():
-    players_database.update_player_database()
-    return "Player database refreshed!"
+    players_updated = players_database.update_player_database()
+    return f"Player database refreshed with {players_updated} players data from Sleeper api!"
