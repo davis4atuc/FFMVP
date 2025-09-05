@@ -30,7 +30,7 @@ def update_player_database():
         
             new_player = Player(
                 player_id=player_id,
-                name=f'{details.get('first_name', 'Unknown')} {details.get('last_name', 'Unknown')}',
+                name=f"{details.get('first_name', 'Unknown')} {details.get('last_name', 'Unknown')}",
                 position=details.get('position', 'Unknown'),
                 team=details.get('team', 'Unknown'),
                 data=details
